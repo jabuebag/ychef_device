@@ -1,34 +1,33 @@
-<div class="pages">
-  <!-- Page, data-page contains page name-->
-  <div data-page="home_page" class="page">
+<!-- Page, data-page contains page name-->
+<div data-page="home_page" class="page">
     <!-- Scrollable page content-->
     <div class="page-content">
+
         <style>
-          .demo-card-header-pic .card-header {
-            height: 40vw;
-            background-size: cover;
-            background-position: center;
-          }
+            .demo-card-header-pic .card-header {
+                height: 40vw;
+                background-size: cover;
+                background-position: center;
+            }
         </style>
         <div id="MenuCard">
-        <script type="text/template7" id="MenuTemplate">
-        {{#each data}}
-            <div class="card demo-card-header-pic">
-                  <div style="background-image:url(https://ychefapp.com/{{imgPath}})" valign="bottom" class="card-header color-white no-border">{{title}}</div>
-                  <div class="card-content">
-                    <div class="card-content-inner">
-                      <p class="color-gray">Posted on {{dateTime}}</p>
-                      <p>{{introduction}}</p>
+            <script type="text/template7" id="MenuTemplate">
+                {{#each data}}
+                <div class="card demo-card-header-pic">
+                    <div style="background-image:url(https://ychefapp.com/{{imgPath}})" valign="bottom" class="card-header color-white no-border">{{title}}</div>
+                    <div class="card-content">
+                        <div class="card-content-inner">
+                            <p class="color-gray">Posted on {{dateTime}}</p>
+                            <p>{{introduction}}</p>
+                        </div>
                     </div>
-                  </div>
-                  <div class="card-footer">
-                    <a href="#" class="">收藏</a>
-                    <a href="#" data-popup=".popup-detail" class="open-detail">预定</a>
-                  </div>
-            </div>
-        {{/each}} 
-        </script>
+                    <div class="card-footer">
+                        <a href="#" class="alert-collect">收藏</a>
+                        <a href="menuDetail.html" class="with-animation">预定</a>
+                    </div>
+                </div>
+                {{/each}}
+            </script>
         </div>
     </div>
-  </div>
 </div>
