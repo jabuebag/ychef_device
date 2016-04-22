@@ -1,18 +1,13 @@
 // get home view instance
 var homeView = myApp.addView('.home-view', {
-    animatePages:false
+    animatePages: false
 });
 
 // now load home page
 homeView.router.loadPage('home.html');
 
-// home 'tab' show event listener
-$$('#home').on('show', function () {
-    
-});
-
 // before home 'page' init event listener
-$$(document).on('pageBeforeInit', '.page[data-page="home_page"]', function (e) {
+myApp.onPageBeforeInit('home_page', function (page) {
     initMenuData();
 });
 
@@ -31,3 +26,14 @@ function bindHtmlData(template, data) {
     return result;
 }
 
+// add event to template7 html show
+$(window).load(function () {
+    var i = setInterval(function () {
+        if ($('.alert-collect').length) {
+            clearInterval(i);
+            $$('.alert-collect').on('click', function () {
+                myApp.alert('收藏成功！');
+            });
+        }
+    }, 100);
+});
