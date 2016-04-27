@@ -13,7 +13,62 @@
 <div data-page="detail_page" class="page">
     <!-- Scrollable page content-->
     <div class="page-content">
-        ... Detail page content goes here
-        <a href="index.html" class="back with-animation"> Go back to home page </a>
+        <style>
+            .facebook-card .card-header {
+                display: block;
+                padding: 10px;
+            }
+            
+            .facebook-card .facebook-avatar {
+                float: left;
+            }
+            
+            .facebook-card .facebook-name {
+                margin-left: 44px;
+                font-size: 14px;
+                font-weight: 500;
+            }
+            
+            .facebook-card .facebook-date {
+                margin-left: 44px;
+                font-size: 13px;
+                color: #8e8e93;
+            }
+            
+            .facebook-card .card-footer {
+                background: #fafafa;
+            }
+            
+            .facebook-card .card-footer a {
+                color: #81848b;
+                font-weight: 500;
+            }
+            
+            .facebook-card .card-content img {
+                display: block;
+            }
+            
+            .facebook-card .card-content-inner {
+                padding: 15px 10px;
+            }
+        </style>
+
+        <div id="MenuDetailCard" class="card facebook-card">
+            <script type="text/template7" id="MenuDetailTemplate">
+                <div class="card-header no-border">
+                    <div class="center">{{title}}</div>
+                </div>
+                <div class="card-content"><img src="https://ychefapp.com/{{imgPath}}" width="100%"></div>
+                <div class="card-footer no-border">
+                    <a href="#" class="link">单价:${{price}}</a>
+                    <a href="#" class="link">人数:{{quantity}}</a>
+                    <a href="#" class="link">GST:5%</a>
+                </div>
+                <div class="card-header no-border">
+                    <div class="center" width="100%">{{description}}</div>
+                </div>
+            </script>
+        </div>
+
     </div>
 </div>
