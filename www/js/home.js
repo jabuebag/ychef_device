@@ -1,5 +1,6 @@
 // get home view instance
 var homeView = myApp.addView('.home-view', {
+    dynamicNavbar: true,
     animatePages: false
 });
 

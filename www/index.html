@@ -16,63 +16,31 @@
 
 <body>
     <!-- Tabs, now tabs wrapper is "views" -->
-    <div class="views tabs toolbar-fixed">
+    <div class="views">
         <!-- Tab 1 - View 1, active by default -->
-        <div id="home" class="view tab home-view active">
+        <div id="home" class="view view-main home-view">
+
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="center">厨说</div>
                 </div>
             </div>
-            <div class="pages navbar-fixed">
+
+            <div class="pages navbar-through toolbar-through">
                 <div data-page="home_page" class="page">
                     <div class="page-content">
 
                     </div>
                 </div>
             </div>
-        </div>
 
-
-        <!-- Tab 2 - View 2 -->
-        <div id="history" class="view tab history-view">
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <div class="center">History</div>
+            <!-- Tab bar with tab links -->
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <a href="home.html"><img height="30" src="img/tabbar/tabbar_home.png" /></a>
+                    <a href="history.html"><img height="30" src="img/tabbar/tabbar_history.png" /></a>
+                    <a href="settings.html"><img height="30" src="img/tabbar/tabbar_me.png" /></a>
                 </div>
-            </div>
-            <div class="pages navbar-fixed">
-                <div data-page="history_page" class="page">
-                    <div class="page-content">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tab 3 - View 3 -->
-        <div id="setting" class="view tab setting-view">
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <div class="center">Settings</div>
-                </div>
-            </div>
-            <div class="pages navbar-fixed">
-                <div data-page="setting_page" class="page">
-                    <div class="page-content">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Tab bar with tab links -->
-        <div class="toolbar tabbar">
-            <div class="toolbar-inner">
-                <a href="#home" class="tab-link active"><img height="30" src="img/tabbar/tabbar_home.png" /></a>
-                <a href="#history" class="tab-link"><img height="30" src="img/tabbar/tabbar_history.png" /></a>
-                <a href="#setting" class="tab-link"><img height="30" src="img/tabbar/tabbar_me.png" /></a>
             </div>
         </div>
     </div>
