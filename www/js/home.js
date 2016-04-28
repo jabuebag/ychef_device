@@ -1,3 +1,4 @@
+//var menuDatas;
 // get home view instance
 var homeView = myApp.addView('.home-view', {
     dynamicNavbar: true,
@@ -18,6 +19,9 @@ function initMenuData() {
         var menuData = data;
         var result = bindHtmlData(menuTemplate, menuData);
         $$('#MenuCard').html(result);
+        $$('.alert-collect').on('click', function () {
+            myApp.alert('收藏成功！');
+        });
     });
 }
 
@@ -26,15 +30,3 @@ function bindHtmlData(template, data) {
     var result = compiledTemplate(data);
     return result;
 }
-
-// add event to template7 html show
-$(window).load(function () {
-    var i = setInterval(function () {
-        if ($('.alert-collect').length) {
-            clearInterval(i);
-            $$('.alert-collect').on('click', function () {
-                myApp.alert('收藏成功！');
-            });
-        }
-    }, 100);
-});
