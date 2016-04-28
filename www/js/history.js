@@ -1,5 +1,4 @@
 myApp.onPageBeforeInit('history_page', function (page) {
-    initHome=false;
     initMenuCollectData();
 });
 

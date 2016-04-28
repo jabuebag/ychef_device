@@ -1,5 +1,6 @@
 // before menu detail 'page' init event listener
 myApp.onPageBeforeInit('detail_page', function (page) {
+    initHome=false;
     var id = page.query.id;
     initMenuDetailData(id);
 });

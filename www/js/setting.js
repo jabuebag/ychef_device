@@ -1,5 +1,4 @@
 myApp.onPageAfterAnimation('setting_page', function (page) {
-    initHome = false;
     addUnregisterAction();
 });
 
