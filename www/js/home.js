@@ -1,4 +1,3 @@
-//var menuDatas;
 // get home view instance
 var homeView = myApp.addView('.home-view', {
     dynamicNavbar: true,
@@ -10,18 +9,22 @@ homeView.router.loadPage('home.html');
 
 // before home 'page' init event listener
 myApp.onPageBeforeInit('home_page', function (page) {
-    initMenuData();
+    if (menuDatas) {
+        initMenuData();
+    } else {
+        $$.getJSON('http://localhost:8080/listing/listingsJson', function (data) {
+            menuDatas = data;
+            initMenuData();
+        });
+    }
 });
 
 function initMenuData() {
     var menuTemplate = $$('#MenuTemplate').html();
-    $$.getJSON('http://localhost:8080/listing/listingsJson', function (data) {
-        var menuData = data;
-        var result = bindHtmlData(menuTemplate, menuData);
-        $$('#MenuCard').html(result);
-        $$('.alert-collect').on('click', function () {
-            myApp.alert('收藏成功！');
-        });
+    var result = bindHtmlData(menuTemplate, menuDatas);
+    $$('#MenuCard').html(result);
+    $$('.alert-collect').on('click', function () {
+        myApp.alert('收藏成功！');
     });
 }
 

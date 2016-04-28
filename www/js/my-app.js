@@ -9,3 +9,6 @@ var myApp = new Framework7({
     }
 });
 var $$ = Dom7;
+
+// used to store all the menus
+var menuDatas;
