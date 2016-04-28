@@ -9,13 +9,16 @@ homeView.router.loadPage('home.html');
 
 // before home 'page' init event listener
 myApp.onPageBeforeInit('home_page', function (page) {
-    if (menuDatas) {
-        initMenuData();
-    } else {
-        $$.getJSON('http://localhost:8080/listing/listingsJson', function (data) {
-            menuDatas = data;
+    if (!initHome) {
+        if (menuDatas) {
             initMenuData();
-        });
+        } else {
+            $$.getJSON('http://localhost:8080/listing/listingsJson', function (data) {
+                menuDatas = data;
+                initMenuData();
+            });
+        }
+        initHome=true;
     }
 });
 
@@ -23,7 +26,11 @@ function initMenuData() {
     var menuTemplate = $$('#MenuTemplate').html();
     var result = bindHtmlData(menuTemplate, menuDatas);
     $$('#MenuCard').html(result);
-    $$('.alert-collect').on('click', function () {
+    $$('.alert-collect').on('click', function (event) {
+        var id = event.target.getAttribute('data');
+        menuCollectDatas.data.push(menuDatas.data.find(function (temp) {
+            return temp.id == id;
+        }));
         myApp.alert('收藏成功！');
     });
 }

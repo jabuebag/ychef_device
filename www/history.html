@@ -9,73 +9,21 @@
     <!-- Scrollable page content-->
     <div class="page-content">
         <div class="list-block media-list">
-            <ul>
-                <li class="item-content">
-                    <div class="item-media">
-                        <img src="" width="44">
-                    </div>
-                    <div class="item-inner">
-                        <div class="item-title-row">
-                            <div class="item-title">Yellow Submarine</div>
+            <ul id="collect-data-ul">
+                <script type="text/template7" id="MenuCollectTemplate">
+                    {{#each data}}
+                    <li class="item-content">
+                        <div class="item-media">
+                            <img src="https://ychefapp.com/{{imgPath}}" width="44">
                         </div>
-                        <div class="item-subtitle">Beatles</div>
-                    </div>
-                </li>
-                <li class="item-content">
-                    <div class="item-media">
-                        <img src="" width="44">
-                    </div>
-                    <div class="item-inner">
-                        <div class="item-title-row">
-                            <div class="item-title">Yellow Submarine</div>
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">{{title}}</div>
+                            </div>
                         </div>
-                        <div class="item-subtitle">Beatles</div>
-                    </div>
-                </li>
-                <li class="item-content">
-                    <div class="item-media">
-                        <img src="" width="44">
-                    </div>
-                    <div class="item-inner">
-                        <div class="item-title-row">
-                            <div class="item-title">Yellow Submarine</div>
-                        </div>
-                        <div class="item-subtitle">Beatles</div>
-                    </div>
-                </li>
-                <li class="item-content">
-                    <div class="item-media">
-                        <img src="" width="44">
-                    </div>
-                    <div class="item-inner">
-                        <div class="item-title-row">
-                            <div class="item-title">Yellow Submarine</div>
-                        </div>
-                        <div class="item-subtitle">Beatles</div>
-                    </div>
-                </li>
-                <li class="item-content">
-                    <div class="item-media">
-                        <img src="" width="44">
-                    </div>
-                    <div class="item-inner">
-                        <div class="item-title-row">
-                            <div class="item-title">Yellow Submarine</div>
-                        </div>
-                        <div class="item-subtitle">Beatles</div>
-                    </div>
-                </li>
-                <li class="item-content">
-                    <div class="item-media">
-                        <img src="" width="44">
-                    </div>
-                    <div class="item-inner">
-                        <div class="item-title-row">
-                            <div class="item-title">Yellow Submarine</div>
-                        </div>
-                        <div class="item-subtitle">Beatles</div>
-                    </div>
-                </li>
+                    </li>
+                    {{/each}}
+                </script>
             </ul>
         </div>
     </div>

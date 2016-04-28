@@ -1,4 +1,9 @@
 myApp.onPageAfterAnimation('setting_page', function (page) {
+    initHome = false;
+    addUnregisterAction();
+});
+
+function addUnregisterAction() {
     $$('.ac-unregister').on('click', function () {
         var buttons1 = [
             {
@@ -19,4 +24,4 @@ myApp.onPageAfterAnimation('setting_page', function (page) {
         var groups = [buttons1, buttons2];
         myApp.actions(groups);
     });
-});
+}
