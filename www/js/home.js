@@ -1,3 +1,4 @@
+var menuTemplate;
 // get home view instance
 var homeView = myApp.addView('.home-view', {
     dynamicNavbar: true,
@@ -20,14 +21,20 @@ myApp.onPageBeforeInit('home_page', function (page) {
 });
 
 function initMenuData() {
-    var menuTemplate = $$('#MenuTemplate').html();
+    menuTemplate = $$('#MenuTemplate').html();
     if (!menuTemplate) {
         return;
     }
     var result = bindHtmlData(menuTemplate, menuDatas);
     $$('#MenuCard').html(result);
+    // add alert collect click action
     $$('.alert-collect').on('click', function (event) {
         collectMenu(event);
+    });
+    // add pull refresh event
+    $$('.pull-to-refresh-content').on('refresh', function (e) {
+        // refresh menu list
+        addRefreshedMenu();
     });
 }
 
@@ -49,4 +56,17 @@ function collectMenu(event) {
         }));
         myApp.alert('收藏成功！');
     }
+}
+
+function addRefreshedMenu() {
+    setTimeout(function () {
+        $$.getJSON('http://localhost:8080/listing/listingsMoreJson/'+menuDatas.data[0].id, function (data) {
+            var result = bindHtmlData(menuTemplate, data);
+            $$('#MenuCard').prepend(result);
+            $$('.alert-collect').on('click', function (event) {
+                collectMenu(event);
+            });
+        });
+        myApp.pullToRefreshDone();
+    }, 1000);
 }
