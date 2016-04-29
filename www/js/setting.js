@@ -1,3 +1,12 @@
+// get home view instance
+var settingView = myApp.addView('.setting-view', {
+    dynamicNavbar: true,
+    animatePages: false
+});
+
+// now load home page
+settingView.router.loadPage('settings.html');
+
 myApp.onPageAfterAnimation('setting_page', function (page) {
     addUnregisterAction();
 });
