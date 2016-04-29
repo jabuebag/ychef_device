@@ -1,5 +1,8 @@
 myApp.onPageBeforeInit('history_page', function (page) {
-    initMenuCollectData();
+    if (menuCollectDatas.data.length != 0) {
+        $$('#collect-label').hide();
+        initMenuCollectData();
+    }
 });
 
 function initMenuCollectData() {
