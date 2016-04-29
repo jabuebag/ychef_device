@@ -1,9 +1,12 @@
-var historyView = myApp.addView('.history-view', {
-    animatePages:false
+myApp.onPageBeforeInit('history_page', function (page) {
+    if (menuCollectDatas.data.length != 0) {
+        $$('#collect-label').hide();
+        initMenuCollectData();
+    }
 });
 
-historyView.router.loadPage('history.html');
-
-$$('#history').on('show', function () {
-    
-});
+function initMenuCollectData() {
+    var menuTemplate = $$('#MenuCollectTemplate').html();
+    var result = bindHtmlData(menuTemplate, menuCollectDatas);
+    $$('#collect-data-ul').html(result);
+}

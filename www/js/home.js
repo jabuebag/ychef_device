@@ -1,5 +1,6 @@
 // get home view instance
 var homeView = myApp.addView('.home-view', {
+    dynamicNavbar: true,
     animatePages: false
 });
 
@@ -8,15 +9,25 @@ homeView.router.loadPage('home.html');
 
 // before home 'page' init event listener
 myApp.onPageBeforeInit('home_page', function (page) {
-    initMenuData();
+    if (menuDatas) {
+        initMenuData();
+    } else {
+        $$.getJSON('http://localhost:8080/listing/listingsJson', function (data) {
+            menuDatas = data;
+            initMenuData();
+        });
+    }
 });
 
 function initMenuData() {
     var menuTemplate = $$('#MenuTemplate').html();
-    $$.getJSON('http://localhost:8080/listing/listingsJson', function (data) {
-        var menuData = data;
-        var result = bindHtmlData(menuTemplate, menuData);
-        $$('#MenuCard').html(result);
+    if (!menuTemplate) {
+        return;
+    }
+    var result = bindHtmlData(menuTemplate, menuDatas);
+    $$('#MenuCard').html(result);
+    $$('.alert-collect').on('click', function (event) {
+        collectMenu(event);
     });
 }
 
@@ -26,14 +37,16 @@ function bindHtmlData(template, data) {
     return result;
 }
 
-// add event to template7 html show
-$(window).load(function () {
-    var i = setInterval(function () {
-        if ($('.alert-collect').length) {
-            clearInterval(i);
-            $$('.alert-collect').on('click', function () {
-                myApp.alert('收藏成功！');
-            });
-        }
-    }, 100);
-});
+function collectMenu(event) {
+    var id = event.target.getAttribute('data');
+    if (menuCollectDatas.data.find(function (temp) {
+            return temp.id == id;
+        })) {
+        myApp.alert('该Menu已收藏！');
+    } else {
+        menuCollectDatas.data.push(menuDatas.data.find(function (temp) {
+            return temp.id == id;
+        }));
+        myApp.alert('收藏成功！');
+    }
+}
