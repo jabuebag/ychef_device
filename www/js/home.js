@@ -59,14 +59,19 @@ function collectMenu(event) {
 }
 
 function addRefreshedMenu() {
-    setTimeout(function () {
-        $$.getJSON('http://localhost:8080/listing/listingsMoreJson/'+menuDatas.data[0].id, function (data) {
-            var result = bindHtmlData(menuTemplate, data);
-            $$('#MenuCard').prepend(result);
-            $$('.alert-collect').on('click', function (event) {
-                collectMenu(event);
-            });
+    $$.getJSON('http://localhost:8080/listing/listingsMoreJson/' + menuDatas.data[0].id, function (data) {
+        var result = bindHtmlData(menuTemplate, data);
+        $$('#MenuCard').prepend(result);
+        $$('.alert-collect').on('click', function (event) {
+            collectMenu(event);
         });
-        myApp.pullToRefreshDone();
-    }, 1000);
+        // show refresh result label
+        var refreshMsg = '目前有0条更新';
+        $$('#pull-refresh-label').text(refreshMsg);
+        $$('#pull-refresh-label').show();
+        setTimeout(function () {
+            $$('#pull-refresh-label').hide();
+        }, 1000);
+    });
+    myApp.pullToRefreshDone();
 }
