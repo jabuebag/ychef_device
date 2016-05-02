@@ -9,11 +9,11 @@ var homeView = myApp.addView('.home-view', {
 homeView.router.loadPage('home.html');
 
 // before home 'page' init event listener
-myApp.onPageBeforeInit('home_page', function (page) {
+myApp.onPageBeforeInit('home_page', function(page) {
     if (menuDatas) {
         initMenuData();
     } else {
-        $$.getJSON('http://localhost:8080/listing/listingsJson', function (data) {
+        $$.getJSON('http://localhost:8080/listing/listingsJson', function(data) {
             menuDatas = data;
             initMenuData();
         });
@@ -27,12 +27,8 @@ function initMenuData() {
     }
     var result = bindHtmlData(menuTemplate, menuDatas);
     $$('#MenuCard').html(result);
-    // add alert collect click action
-    $$('.alert-collect').on('click', function (event) {
-        collectMenu(event);
-    });
     // add pull refresh event
-    $$('.pull-to-refresh-content').on('refresh', function (e) {
+    $$('.pull-to-refresh-content').on('refresh', function(e) {
         // refresh menu list
         addRefreshedMenu();
     });
@@ -44,14 +40,14 @@ function bindHtmlData(template, data) {
     return result;
 }
 
-function collectMenu(event) {
-    var id = event.target.getAttribute('data');
-    if (menuCollectDatas.data.find(function (temp) {
+function collectMenu(element) {
+    var id = element.getAttribute('data');
+    if (menuCollectDatas.data.find(function(temp) {
             return temp.id == id;
         })) {
         myApp.alert('该Menu已收藏！');
     } else {
-        menuCollectDatas.data.push(menuDatas.data.find(function (temp) {
+        menuCollectDatas.data.push(menuDatas.data.find(function(temp) {
             return temp.id == id;
         }));
         myApp.alert('收藏成功！');
@@ -59,17 +55,19 @@ function collectMenu(event) {
 }
 
 function addRefreshedMenu() {
-    $$.getJSON('http://localhost:8080/listing/listingsMoreJson/' + menuDatas.data[0].id, function (data) {
+    $$.getJSON('http://localhost:8080/listing/listingsMoreJson/' + menuDatas.data[0].id, function(data) {
         var result = bindHtmlData(menuTemplate, data);
         $$('#MenuCard').prepend(result);
-        $$('.alert-collect').on('click', function (event) {
-            collectMenu(event);
-        });
         // show refresh result label
-        var refreshMsg = '目前有0条更新';
+        var refreshMsg;
+        if (data.success) {
+            refreshMsg = '目前有' + data.data.length + '条更新';
+        } else {
+            refreshMsg = '目前有0条更新';
+        }
         $$('#pull-refresh-label').text(refreshMsg);
         $$('#pull-refresh-label').show();
-        setTimeout(function () {
+        setTimeout(function() {
             $$('#pull-refresh-label').hide();
         }, 1000);
     });
