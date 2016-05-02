@@ -1,4 +1,7 @@
+// template7 template
 var menuTemplate;
+// Loading flag
+var infinitLoading = false;
 // get home view instance
 var homeView = myApp.addView('.home-view', {
     dynamicNavbar: true,
@@ -32,6 +35,15 @@ function initMenuData() {
         // refresh menu list
         addRefreshedMenu();
     });
+    // add infinit scroll event
+    $$('.infinite-scroll').on('infinite', function() {
+        // Exit, if loading in progress
+        if (infinitLoading) return;
+        // Set loading flag
+        infinitLoading = true;
+        addInfinitMenu();
+        infinitLoading = false;
+    });
 }
 
 function bindHtmlData(template, data) {
@@ -55,7 +67,7 @@ function collectMenu(element) {
 }
 
 function addRefreshedMenu() {
-    $$.getJSON('http://localhost:8080/listing/listingsMoreJson/' + menuDatas.data[0].id, function(data) {
+    $$.getJSON('http://localhost:8080/listing/listingsRefreshJson/' + menuDatas.data[0].id, function(data) {
         var result = bindHtmlData(menuTemplate, data);
         $$('#MenuCard').prepend(result);
         // show refresh result label
@@ -72,4 +84,11 @@ function addRefreshedMenu() {
         }, 1000);
     });
     myApp.pullToRefreshDone();
+}
+
+function addInfinitMenu() {
+    $$.getJSON('http://localhost:8080/listing/listingsMoreJson/' + menuDatas.data[menuDatas.data.length-1].id, function(data) {
+        var result = bindHtmlData(menuTemplate, data);
+        $$('#MenuCard').append(result);
+    });
 }
