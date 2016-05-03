@@ -4,6 +4,16 @@
     </div>
 </div>
 <div data-page="home_page" class="page">
+    <!-- Search Bar -->
+    <form class="searchbar">
+        <div class="searchbar-input">
+            <input type="search" placeholder="Search">
+            <a href="#" class="searchbar-clear"></a>
+        </div>
+        <a id="search-cancel-button" href="#" class="searchbar-cancel">取消</a>
+    </form>
+    <!-- Search Bar overlay-->
+    <div class="searchbar-overlay"></div>
     <!-- Scrollable page content-->
     <div class="page-content pull-to-refresh-content infinite-scroll" data-ptr-distance="55">
         <!-- Default pull to refresh layer-->
@@ -11,15 +21,34 @@
             <div class="preloader"></div>
             <div class="pull-to-refresh-arrow"></div>
         </div>
-        
         <div id="pull-refresh-label" style="text-align: center;" hidden>目前没有更新</div>
-
+        <!-- search display area-->
+        <div class="content-block searchbar-not-found">
+            没有找到您的菜单
+        </div>
+        <div id="menu-search-list">
+            <div class="list-block list-block-search searchbar-found" hidden>
+                <ul id="search-list-Data">
+                    <script type="text/template7" id="MenuTitleTemplate">
+                        {{#each data}}
+                        <li class="item-content">
+                            <a href="menuDetail.html?id={{id}}" class="with-animation">
+                                <div class="item-inner">
+                                    <div class="item-title">{{title}}</div>
+                                </div>
+                            </a>
+                        </li>
+                        {{/each}}
+                    </script>
+                </ul>
+            </div>
+        </div>
         <style>
-            .demo-card-header-pic .card-header {
-                height: 40vw;
-                background-size: cover;
-                background-position: center;
-            }
+        .demo-card-header-pic .card-header {
+            height: 40vw;
+            background-size: cover;
+            background-position: center;
+        }
         </style>
         <div id="MenuCard">
             <script type="text/template7" id="MenuTemplate">
