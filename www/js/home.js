@@ -1,9 +1,15 @@
+// template7 template
 var menuTemplate;
+var menuTitleTemplate;
+// Loading flag
+var infinitLoading = false;
 // get home view instance
 var homeView = myApp.addView('.home-view', {
     dynamicNavbar: true,
     animatePages: false
 });
+
+var menuSearchbar;
 
 // now load home page
 homeView.router.loadPage('home.html');
@@ -16,8 +22,36 @@ myApp.onPageBeforeInit('home_page', function(page) {
         $$.getJSON('http://localhost:8080/listing/listingsJson', function(data) {
             menuDatas = data;
             initMenuData();
+            initMenuTitleData();
         });
     }
+    // add pull refresh event
+    $$('.pull-to-refresh-content').on('refresh', function(e) {
+        // refresh menu list
+        addRefreshedMenu();
+    });
+    // add infinit scroll event
+    $$('.infinite-scroll').on('infinite', function() {
+        // Exit, if loading in progress
+        if (infinitLoading) return;
+        // Set loading flag
+        infinitLoading = true;
+        addInfinitMenu();
+        infinitLoading = false;
+    });
+    // init search bar
+    menuSearchbar = myApp.searchbar('.searchbar', {
+        searchList: '.list-block-search',
+        searchIn: '.item-title',
+        onEnable: function(s) {
+            $$('#MenuCard').hide();
+            $$('#menu-search-list').show();
+        },
+        onDisable: function(s) {
+            $$('#MenuCard').show();
+            $$('#menu-search-list').hide();
+        }
+    });
 });
 
 function initMenuData() {
@@ -27,11 +61,15 @@ function initMenuData() {
     }
     var result = bindHtmlData(menuTemplate, menuDatas);
     $$('#MenuCard').html(result);
-    // add pull refresh event
-    $$('.pull-to-refresh-content').on('refresh', function(e) {
-        // refresh menu list
-        addRefreshedMenu();
-    });
+}
+
+function initMenuTitleData() {
+    menuTitleTemplate = $$('#MenuTitleTemplate').html();
+    if (!menuTitleTemplate) {
+        return;
+    }
+    var result = bindHtmlData(menuTitleTemplate, menuDatas);
+    $$('#search-list-Data').html(result);
 }
 
 function bindHtmlData(template, data) {
@@ -55,12 +93,11 @@ function collectMenu(element) {
 }
 
 function addRefreshedMenu() {
-    $$.getJSON('http://localhost:8080/listing/listingsMoreJson/' + menuDatas.data[0].id, function(data) {
-        var result = bindHtmlData(menuTemplate, data);
-        $$('#MenuCard').prepend(result);
-        // show refresh result label
+    $$.getJSON('http://localhost:8080/listing/listingsRefreshJson/' + menuDatas.data[0].id, function(data) {
         var refreshMsg;
         if (data.success) {
+            var menuResult = bindHtmlData(menuTemplate, data);
+            $$('#MenuCard').prepend(menuResult);
             refreshMsg = '目前有' + data.data.length + '条更新';
         } else {
             refreshMsg = '目前有0条更新';
@@ -72,4 +109,13 @@ function addRefreshedMenu() {
         }, 1000);
     });
     myApp.pullToRefreshDone();
+}
+
+function addInfinitMenu() {
+    $$.getJSON('http://localhost:8080/listing/listingsMoreJson/' + menuDatas.data[menuDatas.data.length - 1].id, function(data) {
+        if (data.success) {
+            var result = bindHtmlData(menuTemplate, data);
+            $$('#MenuCard').append(result);
+        }
+    });
 }
