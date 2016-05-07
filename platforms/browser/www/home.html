@@ -1,0 +1,82 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="center">厨说</div>
+    </div>
+</div>
+<div data-page="home_page" class="page">
+    <!-- Search Bar -->
+    <form class="searchbar">
+        <div class="searchbar-input">
+            <input type="search" placeholder="Search">
+            <a href="#" class="searchbar-clear"></a>
+        </div>
+        <a id="search-cancel-button" href="#" class="searchbar-cancel">取消</a>
+    </form>
+    <!-- Search Bar overlay-->
+    <div class="searchbar-overlay"></div>
+    <!-- Scrollable page content-->
+    <div class="page-content pull-to-refresh-content infinite-scroll" data-ptr-distance="55">
+        <!-- Default pull to refresh layer-->
+        <div class="pull-to-refresh-layer">
+            <div class="preloader"></div>
+            <div class="pull-to-refresh-arrow"></div>
+        </div>
+        <div id="pull-refresh-label" style="text-align: center;" hidden>目前没有更新</div>
+        <!-- search display area-->
+        <div class="content-block searchbar-not-found">
+            没有找到您的菜单
+        </div>
+        <div id="menu-search-list">
+            <div class="list-block list-block-search searchbar-found" hidden>
+                <ul id="search-list-Data">
+                    <script type="text/template7" id="MenuTitleTemplate">
+                        {{#each data}}
+                        <li class="item-content">
+                            <a href="menuDetail.html?id={{id}}" class="with-animation">
+                                <div class="item-inner">
+                                    <div class="item-title">{{title}}</div>
+                                </div>
+                            </a>
+                        </li>
+                        {{/each}}
+                    </script>
+                </ul>
+            </div>
+        </div>
+        <style>
+        .demo-card-header-pic .card-header {
+            height: 40vw;
+            background-size: cover;
+            background-position: center;
+        }
+        </style>
+        <div id="MenuCard">
+            <script type="text/template7" id="MenuTemplate">
+                {{#each data}}
+                <div class="card demo-card-header-pic">
+                    <a href="menuDetail.html?id={{id}}" class="with-animation">
+                        <div style="background-image:url(https://ychefapp.com/{{imgPath}})" valign="bottom" class="card-header color-white no-border">{{title}}</div>
+                    </a>
+                    <div class="card-content">
+                        <div class="card-content-inner">
+                            <p class="color-gray">Posted on {{dateTime}}</p>
+                            <p>{{introduction}}</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" data="{{id}}" onclick="collectMenu(this)" class="alert-collect">收藏</a>
+                        <a href="menuDetail.html?id={{id}}" class="with-animation">预定</a>
+                    </div>
+                </div>
+                {{/each}}
+            </script>
+        </div>
+    </div>
+    <div class="toolbar tabbar">
+        <div class="toolbar-inner">
+            <a href="#home" class="tab-link active"><img height="30" src="img/tabbar/tabbar_home.png" /></a>
+            <a href="#history" class="tab-link"><img height="30" src="img/tabbar/tabbar_history.png" /></a>
+            <a href="#setting" class="tab-link"><img height="30" src="img/tabbar/tabbar_me.png" /></a>
+        </div>
+    </div>
+</div>
