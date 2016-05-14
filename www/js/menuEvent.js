@@ -1,12 +1,24 @@
 var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 var calendarInline;
 var pickerTime;
+var pickerPeople;
 var eventsTime = [];
 var menuEventsTime = {};
-var pickerTimeValue = [];
-var pickerInitToken = false;
+var menuEventsId = {};
+var eventId;
+var pickerTimeValues = [];
+var pickerTimeValue;
+var pickerPeopleValues = [];
+var pickerPeopleValue;
+var pageInitToken = false;
 
 myApp.onPageBeforeInit('menu_event_page', function(page) {
+    pickerTimeValues = [];
+    pickerTimeValue = null;
+    initEventPage();
+});
+
+function initEventPage() {
     $$.getJSON('http://localhost:8080/event/fetchEventsJson/' + currentListingId, function(data) {
         var menuEvents = data;
         eventsTime = menuEvents.events.map(function(a) {
@@ -14,6 +26,7 @@ myApp.onPageBeforeInit('menu_event_page', function(page) {
             var tempTimeStr = tempTime.getFullYear() + '' + tempTime.getMonth() + '' + tempTime.getDate();
             var eventMinutes = tempTime.getMinutes() == 0 ? '00' : tempTime.getMinutes();
             menuEventsTime[tempTimeStr] = tempTime.getHours() + ':' + eventMinutes;
+            menuEventsId[tempTimeStr] = a._id;
             return tempTimeStr;
         });
 
@@ -55,23 +68,99 @@ myApp.onPageBeforeInit('menu_event_page', function(page) {
                     pickerTime.destroy();
                 }
                 var timekey = year + month + day;
-                pickerTimeValue = [];
-                pickerTimeValue.push(menuEventsTime[timekey]);
+                pickerTimeValues = [];
+                pickerTimeValue = null;
+                pickerTimeValues.push(menuEventsTime[timekey]);
+                eventId = menuEventsId[timekey];
                 pickerTime = myApp.picker({
                     input: '#picker-time',
                     closeByOutsideClick: true,
                     cols: [{
                         textAlign: 'center',
-                        values: pickerTimeValue
-                    }]
+                        values: pickerTimeValues
+                    }],
+                    onChange: function() {
+                        pickerTimeValue = pickerTime.value;
+                    }
                 });
             }
         });
 
+        pickerPeople = myApp.picker({
+            input: '#picker-people',
+            closeByOutsideClick: true,
+            cols: [{
+                textAlign: 'center',
+                values: [1, 2, 3]
+            }],
+            onChange: function() {
+                pickerPeopleValue = pickerPeople.value;
+            }
+        });
+
         $$('#picker-time').on('click', function() {
-            if (pickerTimeValue.length == 0) {
+            if (pickerTimeValues.length == 0) {
                 myApp.alert('请先选择日期');
             }
         });
+
+        $$('#event-pay-button').on('click', function() {
+            if (pickerTimeValues.length == 0) {
+                myApp.alert('请选择日期和时间');
+            } else if (!pickerTimeValue) {
+                myApp.alert('请选择活动时间');
+            } else if (!pickerPeopleValue) {
+                myApp.alert('请选择预订人数');
+            } else if (!eventId) {
+                myApp.alert('系统故障，请重新预订')
+            } else {
+                // var url = "http://192.168.1.52:8080/booking/book";
+                // var request = createCORSRequest("post", url);
+                // if (request) {
+                //     // Define a callback function
+                //     request.onload = function(data) {
+                //         alert(data);
+                //     };
+                //     // Send request
+                //     request.send({ "eventId": eventId, "quantity": pickerPeopleValue });
+                // }
+                var data = '{"eventId" : "' + eventId + '" , "quantity" : "' + currentListingId + '" }';
+                var data = JSON.parse(data);
+
+                $.ajax({
+                    type: "POST",
+                    cache: true,
+                    data: data,
+                    url: "http://192.168.1.52:8080/booking/bookJson/" + currentListingId,
+                    crossDomain: true,
+                    jsonpCallback: 'callback',
+                    dataType: 'jsonp',
+                    success: function(responseData) {
+                        alert(responseData.targetUrl);
+                    },
+                    error: function(responseData) {
+                        alert(responseData.targetUrl);
+                    }
+                });
+                // homeView.router.loadPage({
+                //     url: 'payment.html',
+                //     animatePages: true
+                // });
+            }
+        });
     });
-});
+}
+
+function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+        // XHR has 'withCredentials' property only if it supports CORS
+        xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") { // if IE use XDR
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+    } else {
+        xhr = null;
+    }
+    return xhr;
+}
