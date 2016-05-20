@@ -13,6 +13,29 @@
 <div data-page="menu_payment_page" class="page">
     <!-- Scrollable page content-->
     <div class="page-content">
+        <div id="payment-menu-total" class="content-block-title" style="color:red;font-size:medium">总价钱：</div>
+        <div class="list-block">
+            <ul>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">单价：</div>
+                        <div id="payment-menu-price" class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">预订人数</div>
+                        <div id="payment-menu-quantity" class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">GST</div>
+                        <div class="item-after">5%</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <div class="content-block-title">请填写订单信息：</div>
         <form action="http://localhost:8080/booking/charge" method="post" class="ajax-submit">
             <div class="list-block">
@@ -24,7 +47,7 @@
                             <div class="item-inner">
                                 <div class="item-title label">卡号</div>
                                 <div class="item-input">
-                                    <input type="text" placeholder="Your card number">
+                                    <input id="cardNum-value" type="text" placeholder="Your card number">
                                 </div>
                             </div>
                         </div>
@@ -35,7 +58,7 @@
                             <div class="item-inner">
                                 <div class="item-title label">有效月</div>
                                 <div class="item-input">
-                                    <input type="text" placeholder="Expiration month">
+                                    <input id="validateMonth-value" type="text" placeholder="Expiration month">
                                 </div>
                             </div>
                         </div>
@@ -46,7 +69,7 @@
                             <div class="item-inner">
                                 <div class="item-title label">有效年</div>
                                 <div class="item-input">
-                                    <input type="text" placeholder="Expiration year">
+                                    <input id="validateYear-value" type="text" placeholder="Expiration year">
                                 </div>
                             </div>
                         </div>
@@ -57,7 +80,7 @@
                             <div class="item-inner">
                                 <div class="item-title label">安全码</div>
                                 <div class="item-input">
-                                    <input type="text" placeholder="Cvv code">
+                                    <input id="cvvCode-value" type="text" placeholder="Cvv code">
                                 </div>
                             </div>
                         </div>
@@ -68,7 +91,7 @@
                             <div class="item-inner">
                                 <div class="item-title label">邮箱</div>
                                 <div class="item-input">
-                                    <input type="email" placeholder="E-mail">
+                                    <input id="email-value" type="email" placeholder="E-mail">
                                 </div>
                             </div>
                         </div>
@@ -77,7 +100,7 @@
             </div>
         </form>
         <div class="content-block">
-            <p><a href="#" class="button button-big button-fill color-red">提交订单</a></p>
+            <p><a id="payment-menu-submit" href="#" class="button button-big button-fill color-red">提交订单</a></p>
         </div>
     </div>
 </div>

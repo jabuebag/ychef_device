@@ -114,17 +114,7 @@ function initEventPage() {
             } else if (!eventId) {
                 myApp.alert('系统故障，请重新预订')
             } else {
-                // var url = "http://192.168.1.52:8080/booking/book";
-                // var request = createCORSRequest("post", url);
-                // if (request) {
-                //     // Define a callback function
-                //     request.onload = function(data) {
-                //         alert(data);
-                //     };
-                //     // Send request
-                //     request.send({ "eventId": eventId, "quantity": pickerPeopleValue });
-                // }
-                var data = '{"eventId" : "' + eventId + '" , "quantity" : "' + currentListingId + '" }';
+                var data = '{"eventId" : "' + eventId + '" , "quantity" : "' + pickerPeopleValue + '" }';
                 var data = JSON.parse(data);
 
                 $.ajax({
@@ -136,31 +126,18 @@ function initEventPage() {
                     jsonpCallback: 'callback',
                     dataType: 'jsonp',
                     success: function(responseData) {
-                        alert(responseData.targetUrl);
+                        homeView.router.loadPage({
+                            url: 'payment.html',
+                            animatePages: true
+                        });
+
                     },
                     error: function(responseData) {
-                        alert(responseData.targetUrl);
+                        myApp.alert("系统故障，请重新预订");
                     }
                 });
-                // homeView.router.loadPage({
-                //     url: 'payment.html',
-                //     animatePages: true
-                // });
+
             }
         });
     });
-}
-
-function createCORSRequest(method, url) {
-    var xhr = new XMLHttpRequest();
-    if ("withCredentials" in xhr) {
-        // XHR has 'withCredentials' property only if it supports CORS
-        xhr.open(method, url, true);
-    } else if (typeof XDomainRequest != "undefined") { // if IE use XDR
-        xhr = new XDomainRequest();
-        xhr.open(method, url);
-    } else {
-        xhr = null;
-    }
-    return xhr;
 }

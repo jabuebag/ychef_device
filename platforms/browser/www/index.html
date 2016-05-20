@@ -59,12 +59,111 @@
             </div>
         </div>
     </div>
+    <!-- login Popup -->
+    <div class="popup popup-login">
+        <div class="view">
+            <div class="page">
+                <div class="page-content login-screen-content">
+                    <div class="login-screen-title">厨说</div>
+                    <form>
+                        <div class="list-block">
+                            <ul>
+                                <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">邮箱</div>
+                                        <div class="item-input">
+                                            <input id="login-username" type="text" name="username" placeholder="Your Email">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">密码</div>
+                                        <div class="item-input">
+                                            <input id="login-password" type="password" name="password" placeholder="Your Password">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <div class="content-block">
+                            <p><a id="login-login-btn" href="#" class="button button-fill color-green">登录</a></p>
+                        </div>
+                        <div class="list-block">
+                            <ul>
+                                <li><a id="login-signup-btn" href="#" class="item-link list-button">注册</a></li>
+                            </ul>
+                            <div class="list-block-label">
+                                <p>～ 开始你的厨说之旅 ～</p>
+                                <p><a href="#" class="close-popup">取消</a></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup popup-signup">
+        <div class="view">
+            <div class="page">
+                <div class="page-content login-screen-content">
+                    <div class="login-screen-title">厨说</div>
+                    <form>
+                        <div class="list-block">
+                            <ul>
+                                <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">昵称</div>
+                                        <div class="item-input">
+                                            <input type="text" name="nickname" placeholder="Your Nickname">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">邮箱</div>
+                                        <div class="item-input">
+                                            <input type="text" name="username" placeholder="Your Email">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">密码</div>
+                                        <div class="item-input">
+                                            <input type="password" name="password" placeholder="Your Password">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <div class="content-block">
+                            <p><a href="#" class="button button-fill color-green">提交</a></p>
+                        </div>
+                        <div class="list-block">
+                            <ul>
+                                <li><a href="#" class="item-link list-button">登录</a></li>
+                            </ul>
+                            <div class="list-block-label">
+                                <p>～ 开始你的厨说之旅 ～</p>
+                                <p><a href="#" class="close-popup">取消</a></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Path to Framework7 Library JS-->
     <!--    <script type="text/javascript" src="js/jQuery-2.1.4.min.js"></script>-->
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <!-- Path to Framework7 Library JS-->
     <script type="text/javascript" src="js/template7.min.js"></script>
     <script type="text/javascript" src="js/jQuery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <!-- Path to your app js-->
     <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/home.js"></script>
@@ -73,6 +172,9 @@
     <script type="text/javascript" src="js/menuDetail.js"></script>
     <script type="text/javascript" src="js/menuEvent.js"></script>
     <script type="text/javascript" src="js/payment.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/signup.js"></script>
+    <script type="text/javascript" src="js/setting_person.js"></script>
 </body>
 
 </html>
