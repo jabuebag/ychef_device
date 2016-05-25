@@ -9,7 +9,8 @@ var settingView = myApp.addView('.setting-view', {
 settingView.router.loadPage('settings.html');
 
 $$('#setting').on('show', function() {
-
+    username = signup_username;
+    password = signup_password;
 });
 
 myApp.onPageBeforeInit('setting_page', function(page) {

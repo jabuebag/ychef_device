@@ -7,12 +7,24 @@ var historyView = myApp.addView('.history-view', {
 // now load home page
 historyView.router.loadPage('history.html');
 
-$$('#history').on('show', function () {
+$$('#history').on('show', function() {
     if (menuCollectDatas.data.length != 0) {
         historyView.router.reloadPage('history.html');
         $$('#collect-label').hide();
         initMenuCollectData();
     }
+});
+
+myApp.onPageBeforeInit('home_page', function(page) {
+    $$('.tab-setting').on('click', function() {
+        if (username) {
+            myApp.showTab('#setting');
+        } else {
+            myApp.popup('.popup-login');
+        }
+
+        //myApp.showTab('#setting');
+    });
 });
 
 function initMenuCollectData() {

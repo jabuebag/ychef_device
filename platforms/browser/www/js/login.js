@@ -1,12 +1,18 @@
 var username;
-var password;
+var password = 'haha';
 
 $$('#login-login-btn').on('click', function() {
     // myApp.closeModal('.popup-login');
     // myApp.showTab('#setting');
     username = $$('#login-username').val();
     password = $$('#login-password').val();
-    login(username, password);
+    if (!username) {
+        myApp.alert('请输入用户名');
+    } else if (!password) {
+        myApp.alert('请输入密码');
+    } else {
+        login(username, password);
+    }
 });
 
 $$('#login-signup-btn').on('click', function() {
