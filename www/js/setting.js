@@ -8,10 +8,21 @@ var settingView = myApp.addView('.setting-view', {
 // now load home page
 settingView.router.loadPage('settings.html');
 
+$$('#setting').on('show', function() {
+
+});
+
 myApp.onPageBeforeInit('setting_page', function(page) {
     if (!unregisterActionToken) {
         addUnregisterAction();
     }
+    $$('.tab-setting').on('click', function() {
+        if (username) {
+            myApp.showTab('#setting');
+        } else {
+            myApp.popup('.popup-login');
+        }
+    });
 });
 
 function addUnregisterAction() {
@@ -21,7 +32,11 @@ function addUnregisterAction() {
             label: true
         }, {
             text: '注销',
-            bold: true
+            bold: true,
+            onClick: function() {
+                username = null;
+                myApp.showTab('#home');
+            }
         }, ];
         var buttons2 = [{
             text: 'Cancel',

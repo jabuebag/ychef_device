@@ -14,6 +14,8 @@ var menuSearchbar;
 // now load home page
 homeView.router.loadPage('home.html');
 
+$$('#home').on('show', function() {});
+
 // before home 'page' init event listener
 myApp.onPageBeforeInit('home_page', function(page) {
     if (menuDatas) {
@@ -51,6 +53,16 @@ myApp.onPageBeforeInit('home_page', function(page) {
             $$('#MenuCard').show();
             $$('#menu-search-list').hide();
         }
+    });
+
+    $$('.tab-setting').on('click', function() {
+        if (username) {
+            myApp.showTab('#setting');
+        } else {
+            myApp.popup('.popup-login');
+        }
+        
+        //myApp.showTab('#setting');
     });
 });
 
