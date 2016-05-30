@@ -21,7 +21,7 @@ myApp.onPageBeforeInit('home_page', function(page) {
     if (menuDatas) {
         initMenuData();
     } else {
-        $$.getJSON('http://192.168.1.52:8080/listing/listingsJson', function(data) {
+        $$.getJSON(REMOTE_SERVER + 'listing/listingsJson', function(data) {
             menuDatas = data;
             initMenuData();
             initMenuTitleData();
@@ -105,7 +105,7 @@ function collectMenu(element) {
 }
 
 function addRefreshedMenu() {
-    $$.getJSON('http://192.168.1.52:8080/listing/listingsRefreshJson/' + menuDatas.data[0].id, function(data) {
+    $$.getJSON(REMOTE_SERVER + 'listing/listingsRefreshJson/' + menuDatas.data[0].id, function(data) {
         var refreshMsg;
         if (data.success) {
             var menuResult = bindHtmlData(menuTemplate, data);
@@ -124,7 +124,7 @@ function addRefreshedMenu() {
 }
 
 function addInfinitMenu() {
-    $$.getJSON('http://192.168.1.52:8080/listing/listingsMoreJson/' + menuDatas.data[menuDatas.data.length - 1].id, function(data) {
+    $$.getJSON(REMOTE_SERVER + 'listing/listingsMoreJson/' + menuDatas.data[menuDatas.data.length - 1].id, function(data) {
         if (data.success) {
             var result = bindHtmlData(menuTemplate, data);
             $$('#MenuCard').append(result);

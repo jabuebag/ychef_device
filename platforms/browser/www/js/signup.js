@@ -33,7 +33,7 @@ function signup(nickname, username, password) {
         type: "POST",
         cache: true,
         data: data,
-        url: "http://192.168.1.52:8080/user/deviceSignup",
+        url: REMOTE_SERVER + "user/deviceSignup",
         crossDomain: true,
         jsonpCallback: 'callback',
         dataType: 'jsonp',

@@ -53,7 +53,7 @@ function tokenResponseHandler(status, response) {
             type: "POST",
             cache: true,
             data: data,
-            url: "http://192.168.1.52:8080/booking/chargeJson",
+            url: REMOTE_SERVER + "booking/chargeJson",
             crossDomain: true,
             jsonpCallback: 'callback',
             dataType: 'jsonp',

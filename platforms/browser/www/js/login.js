@@ -28,7 +28,7 @@ function login(username, password) {
         type: "POST",
         cache: true,
         data: data,
-        url: "http://192.168.1.52:8080/user/deviceLogin",
+        url: REMOTE_SERVER + "user/deviceLogin",
         crossDomain: true,
         jsonpCallback: 'callback',
         dataType: 'jsonp',

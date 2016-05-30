@@ -19,7 +19,7 @@ myApp.onPageBeforeInit('menu_event_page', function(page) {
 });
 
 function initEventPage() {
-    $$.getJSON('http://192.168.1.52:8080/event/fetchEventsJson/' + currentListingId, function(data) {
+    $$.getJSON(REMOTE_SERVER + 'event/fetchEventsJson/' + currentListingId, function(data) {
         var menuEvents = data;
         eventsTime = menuEvents.events.map(function(a) {
             var tempTime = new Date(a.start);
@@ -121,7 +121,7 @@ function initEventPage() {
                     type: "POST",
                     cache: true,
                     data: data,
-                    url: "http://192.168.1.52:8080/booking/bookJson/" + currentListingId,
+                    url: REMOTE_SERVER + "booking/bookJson/" + currentListingId,
                     crossDomain: true,
                     jsonpCallback: 'callback',
                     dataType: 'jsonp',
