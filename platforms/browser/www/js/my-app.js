@@ -1,12 +1,12 @@
 var myApp = new Framework7({
     modalTitle: '提示',
     // Hide and show indicator during ajax requests
-    onAjaxStart: function (xhr) {
-        myApp.showIndicator();
-    },
-    onAjaxComplete: function (xhr) {
-        myApp.hideIndicator();
-    }
+    // onAjaxStart: function (xhr) {
+    //     myApp.showIndicator();
+    // },
+    // onAjaxComplete: function (xhr) {
+    //     myApp.hideIndicator();
+    // }
 });
 var $$ = Dom7;
 

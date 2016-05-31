@@ -15,7 +15,9 @@ var pageInitToken = false;
 myApp.onPageBeforeInit('menu_event_page', function(page) {
     pickerTimeValues = [];
     pickerTimeValue = null;
+    myApp.showIndicator();
     initEventPage();
+    myApp.hideIndicator();
 });
 
 function initEventPage() {

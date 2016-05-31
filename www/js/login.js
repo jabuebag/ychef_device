@@ -1,5 +1,5 @@
 var username;
-var password = 'haha';
+var password;
 
 $$('#login-login-btn').on('click', function() {
     // myApp.closeModal('.popup-login');
@@ -11,6 +11,7 @@ $$('#login-login-btn').on('click', function() {
     } else if (!password) {
         myApp.alert('请输入密码');
     } else {
+        myApp.showIndicator();
         login(username, password);
     }
 });
@@ -33,10 +34,17 @@ function login(username, password) {
         jsonpCallback: 'callback',
         dataType: 'jsonp',
         success: function(responseData) {
+            myApp.hideIndicator();
             myApp.closeModal('.popup-login');
-            myApp.showTab('#setting');
+            if (nextLink) {
+                myApp.showTab('#home');
+            } else {
+               myApp.showTab('#setting'); 
+            }
+            
         },
         error: function(responseData) {
+            myApp.hideIndicator();
             myApp.alert("登录失败");
             username = null;
             password = null;

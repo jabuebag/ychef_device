@@ -15,6 +15,7 @@ $$('#signup-submit-btn').on('click', function() {
     } else if (!signup_password) {
     	myApp.alert('请输入密码');
     } else {
+        myApp.showIndicator();
         signup(nickname, username, password);
     }
 });
@@ -38,10 +39,16 @@ function signup(nickname, username, password) {
         jsonpCallback: 'callback',
         dataType: 'jsonp',
         success: function(responseData) {
+            myApp.hideIndicator();
             myApp.closeModal('.popup-signup');
-            myApp.showTab('#setting');
+            if (nextLink) {
+                myApp.showTab('#home');
+            } else {
+               myApp.showTab('#setting'); 
+            }
         },
         error: function(responseData) {
+            myApp.hideIndicator();
             myApp.alert("登录失败");
             username = null;
             password = null;

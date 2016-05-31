@@ -21,11 +21,13 @@ myApp.onPageBeforeInit('home_page', function(page) {
     if (menuDatas) {
         initMenuData();
     } else {
+        myApp.showIndicator();
         $$.getJSON(REMOTE_SERVER + 'listing/listingsJson', function(data) {
             menuDatas = data;
             initMenuData();
             initMenuTitleData();
         });
+        myApp.hideIndicator();
     }
     // add pull refresh event
     $$('.pull-to-refresh-content').on('refresh', function(e) {
@@ -61,7 +63,7 @@ myApp.onPageBeforeInit('home_page', function(page) {
         } else {
             myApp.popup('.popup-login');
         }
-        
+
         //myApp.showTab('#setting');
     });
 });
