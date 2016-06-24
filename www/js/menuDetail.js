@@ -9,7 +9,7 @@ myApp.onPageBeforeInit('detail_page', function (page) {
 
 function initMenuDetailData(currentListingId) {
     var menuDetailTemplate = $$('#MenuDetailTemplate').html();
-    $$.getJSON('http://localhost:8080/listing/detailPortalJson/'+currentListingId, function (data) {
+    $$.getJSON('http://192.168.1.52:8080/listing/detailPortalJson/'+currentListingId, function (data) {
         var menuDetailData = data;
         menuPrice = menuDetailData.price;
         var result = bindHtmlData(menuDetailTemplate, menuDetailData);
