@@ -19,7 +19,7 @@ myApp.onPageBeforeInit('menu_event_page', function(page) {
 });
 
 function initEventPage() {
-    $$.getJSON('http://localhost:8080/event/fetchEventsJson/' + currentListingId, function(data) {
+    $$.getJSON('http://192.168.1.52:8080/event/fetchEventsJson/' + currentListingId, function(data) {
         var menuEvents = data;
         eventsTime = menuEvents.events.map(function(a) {
             var tempTime = new Date(a.start);
